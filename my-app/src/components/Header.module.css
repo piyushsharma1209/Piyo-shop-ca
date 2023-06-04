@@ -1,0 +1,17 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.nav {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navLink {
+    text-decoration: none;
+    color: black;
+}

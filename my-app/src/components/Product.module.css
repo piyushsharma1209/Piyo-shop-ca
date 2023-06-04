@@ -1,0 +1,28 @@
+.productCard {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.productImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.productTitle {
+    margin-top: 10px;
+}
+
+.productPrice {
+    margin-top: 10px;
+}
+
+.viewProductButton {
+    display: inline-block;
+    margin-top: 10px;
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    text-decoration: none;
+}

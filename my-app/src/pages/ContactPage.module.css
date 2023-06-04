@@ -1,0 +1,10 @@
+.contactPage {
+    padding: 20px;
+}
+
+.contactForm {
+    display: grid;
+    gap: 20px;
+}
+
+/* Add additional styles for form elements */

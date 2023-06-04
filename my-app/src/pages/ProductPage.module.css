@@ -1,0 +1,19 @@
+.productPage {
+    padding: 20px;
+}
+
+.productImage {
+    width: 300px;
+}
+
+.productTitle {
+    margin-top: 20px;
+}
+
+.productDescription {
+    margin-top: 10px;
+}
+
+.addToCartButton {
+    margin-top: 20px;
+}
