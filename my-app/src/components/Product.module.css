@@ -1,5 +1,4 @@
 .productCard {
-    flex: 0 0 calc(25% - 16px);
     display: flex;
     flex-direction: column;
     background-color: #ffffff;
@@ -9,7 +8,7 @@
 }
 
 .productImage {
-    width: 100%;
+    width: 200px;
     height: 180px;
     object-fit: cover;
     border-top-left-radius: 8px;
@@ -41,6 +40,7 @@
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
 }
 
 .viewProductButton:hover {

@@ -3,10 +3,11 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Product from '../components/Product';
 import styles from './HomePage.module.css';
-import banner from '../images/banner.png';
 
 const HomePage = () => {
     const [products, setProducts] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [searchResults, setSearchResults] = useState([]);
 
     useEffect(() => {
         axios
@@ -19,23 +20,68 @@ const HomePage = () => {
             });
     }, []);
 
-    const featuredProducts = products.slice(0, 4); // Show only 4 featured products
+    useEffect(() => {
+        if (searchQuery) {
+            const filteredProducts = products.filter((product) =>
+                product.title.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+            setSearchResults(filteredProducts);
+        } else {
+            setSearchResults([]);
+        }
+    }, [searchQuery, products]);
 
-    return (
-        <div className={styles.homePage}>
-            <div className={styles.banner}>
-                <img src={banner} alt="Banner" className={styles.bannerImage} />
-            </div>
-            <div className={styles.productSection}>
-                <h2 className={styles.sectionTitle}>Featured Products</h2>
+    const handleSearchInputChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
+    const renderProducts = () => {
+        if (searchQuery) {
+            if (searchResults.length === 0) {
+                return <p>No results found.</p>;
+            }
+            return (
+                <div className={styles.productList}>
+                    {searchResults.map((product) => (
+                        <Product key={product.id} product={product} />
+                    ))}
+                </div>
+            );
+        } else {
+            const featuredProducts = products.slice(0, 4); // Show only 4 featured products
+            return (
                 <div className={styles.productList}>
                     {featuredProducts.map((product) => (
                         <Product key={product.id} product={product} />
                     ))}
                 </div>
-                <Link to="/all-products" className={styles.viewAllButton}>
-                    View All Products
-                </Link>
+            );
+        }
+    };
+
+    return (
+        <div className={styles.homePage}>
+            <div className={styles.productSection}>
+                <div className={styles.searchBar}>
+                    <input
+                        type="text"
+                        placeholder="Search products..."
+                        value={searchQuery}
+                        onChange={handleSearchInputChange}
+                    />
+                </div>
+                <h2 className={styles.sectionTitle}>Featured Products</h2>
+                {renderProducts()}
+                {searchQuery && (
+                    <p className={styles.searchInfo}>
+                        Showing results for "{searchQuery}"
+                    </p>
+                )}
+                {!searchQuery && (
+                    <Link to="/products" className={styles.viewAllButton}>
+                        View All Products
+                    </Link>
+                )}
             </div>
         </div>
     );

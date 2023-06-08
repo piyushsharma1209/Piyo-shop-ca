@@ -7,44 +7,46 @@ const ContactPage = () => {
     const [email, setEmail] = useState('');
     const [body, setBody] = useState('');
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         // Handle form submission logic
     };
 
     return (
         <div className={styles.contactPage}>
-            <h1>Contact Us</h1>
-            <form className={styles.contactForm} onSubmit={handleSubmit}>
-                <input
-                    type="text"
-                    placeholder="Full Name"
-                    value={fullName}
-                    onChange={e => setFullName(e.target.value)}
-                    required
-                />
-                <input
-                    type="text"
-                    placeholder="Subject"
-                    value={subject}
-                    onChange={e => setSubject(e.target.value)}
-                    required
-                />
-                <input
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
-                    required
-                />
-                <textarea
-                    placeholder="Body"
-                    value={body}
-                    onChange={e => setBody(e.target.value)}
-                    required
-                />
-                <button type="submit">Submit</button>
-            </form>
+            <div className={styles.card}>
+                <h1>Contact Us</h1>
+                <form className={styles.contactForm} onSubmit={handleSubmit}>
+                    <input
+                        type="text"
+                        placeholder="Full Name"
+                        value={fullName}
+                        onChange={(e) => setFullName(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="text"
+                        placeholder="Subject"
+                        value={subject}
+                        onChange={(e) => setSubject(e.target.value)}
+                        required
+                    />
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <textarea
+                        placeholder="Message"
+                        value={body}
+                        onChange={(e) => setBody(e.target.value)}
+                        required
+                    />
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     );
 };

@@ -30,7 +30,16 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route path="/contact" component={ContactPage} />
-            <Route path="/products" component={AllProductsPage} />
+            <Route
+              path="/products"
+              render={(props) => (
+                <AllProductsPage
+                  {...props}
+                  handleAddToCart={handleAddToCart}
+                  cartItems={cartItems}
+                />
+              )}
+            />
             <Route
               path="/product/:id"
               render={(props) => (
@@ -57,7 +66,6 @@ function App() {
                 <CheckoutSuccessPage {...props} cartItems={cartItems} />
               )}
             />
-            <Route path="/all-products" component={AllProductsPage} />
           </Switch>
         </div>
         <Footer />

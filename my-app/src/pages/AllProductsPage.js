@@ -18,11 +18,14 @@ const HomePage = () => {
 
     return (
         <div className={styles.homePage}>
-            <h1>Our Products</h1>
-            <div className={styles.productList}>
-                {products.map(product => (
-                    <Product key={product.id} product={product} />
-                ))}
+            <div className={styles.productSection}>
+
+                <h2 className={styles.sectionTitle}>Our Products</h2>
+                <div className={styles.productList}>
+                    {products.map(product => (
+                        <Product key={product.id} product={product} />
+                    ))}
+                </div>
             </div>
         </div>
     );
