@@ -3,7 +3,46 @@
     text-align: center;
 }
 
+.card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.productImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.productDetails {
+    flex-grow: 1;
+}
+
+.productTitle {
+    margin: 0;
+}
+
+.productPrice {
+    margin: 0;
+}
+
+.total {
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.successImage {
+    width: 50px;
+    height: 50px;
+    margin-top: 20px;
+}
+
 .link {
-    text-decoration: none;
-    color: blue;
+    display: inline-block;
+    margin-top: 20px;
 }

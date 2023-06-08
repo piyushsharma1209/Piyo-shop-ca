@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -7,19 +7,57 @@ import ContactPage from './pages/ContactPage';
 import ProductPage from './pages/ProductPage';
 import CheckoutPage from './pages/CheckoutPage';
 import CheckoutSuccessPage from './pages/CheckoutSuccessPage';
+import AllProductsPage from './pages/AllProductsPage';
 
 function App() {
+  const [cartItems, setCartItems] = useState([]);
+
+  const handleAddToCart = (product) => {
+    setCartItems((prevCartItems) => [...prevCartItems, product]);
+  };
+
+  const handleRemoveFromCart = (itemId) => {
+    setCartItems((prevCartItems) =>
+      prevCartItems.filter((item) => item.id !== itemId)
+    );
+  };
+
   return (
     <Router>
       <div className="app">
-        <Header />
+        <Header cartItemsCount={cartItems.length} />
         <div className="content">
           <Switch>
-            <Route path="/" exact component={HomePage} />
+            <Route exact path="/" component={HomePage} />
             <Route path="/contact" component={ContactPage} />
-            <Route path="/product/:id" component={ProductPage} />
-            <Route path="/checkout" component={CheckoutPage} />
-            <Route path="/checkout-success" component={CheckoutSuccessPage} />
+            <Route path="/products" component={AllProductsPage} />
+            <Route
+              path="/product/:id"
+              render={(props) => (
+                <ProductPage
+                  {...props}
+                  handleAddToCart={handleAddToCart}
+                  cartItems={cartItems}
+                />
+              )}
+            />
+            <Route
+              path="/checkout"
+              render={(props) => (
+                <CheckoutPage
+                  {...props}
+                  cartItems={cartItems}
+                  handleRemoveFromCart={handleRemoveFromCart}
+                />
+              )}
+            />
+            <Route
+              path="/checkout-success"
+              render={(props) => (
+                <CheckoutSuccessPage {...props} cartItems={cartItems} />
+              )}
+            />
+            <Route path="/all-products" component={AllProductsPage} />
           </Switch>
         </div>
         <Footer />

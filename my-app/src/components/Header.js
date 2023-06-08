@@ -8,8 +8,21 @@ const Header = () => {
         <header className={styles.header}>
             <nav>
                 <ul className={styles.nav}>
-                    <li><Link to="/" className={styles.navLink}>Home</Link></li>
-                    <li><Link to="/contact" className={styles.navLink}>Contact</Link></li>
+                    <li>
+                        <Link to="/" className={styles.navLink}>
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/products" className={styles.navLink}>
+                            Products
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/contact" className={styles.navLink}>
+                            Contact
+                        </Link>
+                    </li>
                 </ul>
             </nav>
             <CartIcon />
