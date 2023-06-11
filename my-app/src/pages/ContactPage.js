@@ -9,9 +9,7 @@ const ContactPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add validation logic here
         if (fullName && subject && email && body) {
-            // All fields are filled, perform desired action
             console.log('Form data:', {
                 fullName,
                 subject,

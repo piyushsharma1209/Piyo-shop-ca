@@ -22,6 +22,15 @@ function App() {
     );
   };
 
+  const handleUpdateQuantity = (updatedQuantity) => {
+    const updatedCartItems = cartItems.map((item) => {
+      const updatedItem = { ...item };
+      updatedItem.quantity = updatedQuantity[item.id] || item.quantity;
+      return updatedItem;
+    });
+    setCartItems(updatedCartItems);
+  };
+
   return (
     <Router>
       <div className="app">
@@ -57,6 +66,7 @@ function App() {
                   {...props}
                   cartItems={cartItems}
                   handleRemoveFromCart={handleRemoveFromCart}
+                  handleUpdateQuantity={handleUpdateQuantity} // Pass the handleUpdateQuantity function as a prop
                 />
               )}
             />

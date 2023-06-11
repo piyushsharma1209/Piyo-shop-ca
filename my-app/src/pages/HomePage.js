@@ -48,7 +48,7 @@ const HomePage = () => {
                 </div>
             );
         } else {
-            const featuredProducts = products.slice(0, 4); // Show only 4 featured products
+            const featuredProducts = products.slice(0, 4);
             return (
                 <div className={styles.productList}>
                     {featuredProducts.map((product) => (

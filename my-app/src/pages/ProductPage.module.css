@@ -90,3 +90,14 @@
 .reviews p {
     margin: 0;
 }
+
+.quantityContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.quantityInput {
+    width: 50px;
+    margin-left: 5px;
+}

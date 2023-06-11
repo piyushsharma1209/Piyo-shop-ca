@@ -1,28 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './CheckoutPage.module.css';
 
-const CheckoutPage = ({ cartItems, handleRemoveFromCart }) => {
-    const total = cartItems.reduce(
-        (accumulator, item) =>
-            item.discountedPrice && item.discountedPrice < item.price
-                ? accumulator + item.discountedPrice
-                : accumulator + item.price,
-        0
-    );
+const CheckoutPage = ({ cartItems, handleRemove, handleUpdateQuantity }) => {
+    const [quantity, setQuantity] = useState({});
 
-    const handleRemove = (itemId) => {
-        handleRemoveFromCart(itemId);
+    const handleQuantityChange = (itemId, value) => {
+        setQuantity((prevState) => ({
+            ...prevState,
+            [itemId]: value,
+        }));
     };
 
     const formatPrice = (price) => {
         return price.toFixed(2);
     };
 
+    const total = cartItems.reduce(
+        (accumulator, item) =>
+            item.discountedPrice && item.discountedPrice < item.price
+                ? accumulator + item.discountedPrice * (quantity[item.id] || item.quantity)
+                : accumulator + item.price * (quantity[item.id] || item.quantity),
+        0
+    );
+
     return (
         <div className={styles.checkoutPage}>
-            <h1>Checkout</h1>
-            {/* Display cart items and total */}
             {cartItems.map((item) => (
                 <div key={item.id} className={styles.cartItem}>
                     <div className={styles.productCard}>
@@ -30,10 +33,26 @@ const CheckoutPage = ({ cartItems, handleRemoveFromCart }) => {
                         <div className={styles.productInfo}>
                             <h3 className={styles.productTitle}>{item.title}</h3>
                             <span className={styles.productPrice}>
-                                ${formatPrice(
+                                ${item.discountedPrice && item.discountedPrice < item.price
+                                    ? item.discountedPrice
+                                    : item.price}
+                            </span>
+                            <div>
+                                Quantity:{' '}
+                                <input
+                                    type="number"
+                                    min={1}
+                                    value={quantity[item.id] || item.quantity}
+                                    onChange={(e) => handleQuantityChange(item.id, e.target.value)}
+                                    className={styles.quantityInput}
+                                />
+                            </div>
+                            <span className={styles.productTotalPrice}>
+                                Total: $
+                                {formatPrice(
                                     item.discountedPrice && item.discountedPrice < item.price
-                                        ? item.discountedPrice
-                                        : item.price
+                                        ? item.discountedPrice * (quantity[item.id] || item.quantity)
+                                        : item.price * (quantity[item.id] || item.quantity)
                                 )}
                             </span>
                         </div>
@@ -44,9 +63,18 @@ const CheckoutPage = ({ cartItems, handleRemoveFromCart }) => {
                 </div>
             ))}
             <div className={styles.total}>Total: ${formatPrice(total)}</div>
-            <Link to="/checkout-success" className={styles.checkoutButton}>
-                Checkout
-            </Link>
+            {cartItems.length > 0 ? (
+                <div>
+                    <button className={styles.updateButton} onClick={() => handleUpdateQuantity(quantity)}>
+                        Update Cart
+                    </button>
+                    <Link to="/checkout-success" className={styles.checkoutButton}>
+                        Checkout
+                    </Link>
+                </div>
+            ) : (
+                <div className={styles.emptyCartMessage}>Your cart is empty.</div>
+            )}
         </div>
     );
 };

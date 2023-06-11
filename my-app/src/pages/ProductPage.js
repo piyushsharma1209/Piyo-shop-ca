@@ -7,6 +7,7 @@ const ProductPage = ({ handleAddToCart }) => {
     const { id } = useParams();
     const history = useHistory();
     const [product, setProduct] = useState(null);
+    const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
         axios
@@ -20,8 +21,14 @@ const ProductPage = ({ handleAddToCart }) => {
     }, [id]);
 
     const addToCart = () => {
-        handleAddToCart(product);
+        const productWithQuantity = { ...product, quantity };
+        handleAddToCart(productWithQuantity);
         history.push('/checkout');
+    };
+
+    const handleQuantityChange = (event) => {
+        const newQuantity = parseInt(event.target.value);
+        setQuantity(newQuantity);
     };
 
     if (!product) {
@@ -31,6 +38,7 @@ const ProductPage = ({ handleAddToCart }) => {
     const { title, imageUrl, price, discountedPrice, description, reviews } = product;
 
     const discount = price - discountedPrice;
+    const totalPrice = discountedPrice !== price ? discountedPrice * quantity : price * quantity;
 
     return (
         <div className={styles.productPage}>
@@ -49,6 +57,18 @@ const ProductPage = ({ handleAddToCart }) => {
                             <span>${price.toFixed(2)}</span>
                         )}
                     </p>
+                    <div className={styles.quantityContainer}>
+                        <label htmlFor="quantity">Quantity:</label>
+                        <input
+                            type="number"
+                            id="quantity"
+                            min="1"
+                            value={quantity}
+                            onChange={handleQuantityChange}
+                            className={styles.quantityInput}
+                        />
+                    </div>
+                    <p className={styles.totalPrice}>Total: ${totalPrice.toFixed(2)}</p>
                 </div>
             </div>
             <p className={styles.productDescription}>{description}</p>

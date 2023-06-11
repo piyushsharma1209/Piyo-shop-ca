@@ -7,8 +7,8 @@ const CheckoutSuccessPage = ({ cartItems }) => {
     const total = cartItems.reduce(
         (accumulator, item) =>
             item.discountedPrice && item.discountedPrice < item.price
-                ? accumulator + item.discountedPrice
-                : accumulator + item.price,
+                ? accumulator + item.discountedPrice * item.quantity
+                : accumulator + item.price * item.quantity,
         0
     );
 
@@ -17,23 +17,23 @@ const CheckoutSuccessPage = ({ cartItems }) => {
             <h1>Order Successful</h1>
             <p>Your order has been placed successfully.</p>
             <img src={logo} alt="Success" className={styles.successImage} />
-            {/* Display cart items and total */}
             {cartItems.map((item) => (
                 <div key={item.id} className={styles.card}>
                     <img src={item.imageUrl} alt={item.title} className={styles.productImage} />
                     <div className={styles.productDetails}>
                         <h3 className={styles.productTitle}>{item.title}</h3>
-                        <p className={styles.productPrice}>
+                        <span className={styles.productPrice}>
                             ${item.discountedPrice && item.discountedPrice < item.price
-                                ? item.discountedPrice.toFixed(2)
-                                : item.price.toFixed(2)}
-                        </p>
+                                ? item.discountedPrice
+                                : item.price}
+                        </span>
+                        <span className={styles.productQuantity}>Quantity: {item.quantity}</span>
                     </div>
                 </div>
             ))}
             <div className={styles.total}>Total: ${total.toFixed(2)}</div>
-            <Link to="/" className={styles.link}>
-                Go back to the store
+            <Link to="/products" className={styles.continueShoppingButton}>
+                Continue Shopping
             </Link>
         </div>
     );
