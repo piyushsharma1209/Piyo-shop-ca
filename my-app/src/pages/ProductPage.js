@@ -28,19 +28,48 @@ const ProductPage = ({ handleAddToCart }) => {
         return <div>Loading...</div>;
     }
 
+    const { title, imageUrl, price, discountedPrice, description, reviews } = product;
+
+    const discount = price - discountedPrice;
+
     return (
         <div className={styles.productPage}>
             <div className={styles.productCard}>
-                <img src={product.imageUrl} alt={product.title} className={styles.productImage} />
+                <img src={imageUrl} alt={title} className={styles.productImage} />
                 <div className={styles.productInfo}>
-                    <h2 className={styles.productTitle}>{product.title}</h2>
-                    <p className={styles.productPrice}>${product.price.toFixed(2)}</p>
+                    <h2 className={styles.productTitle}>{title}</h2>
+                    <p className={styles.productPrice}>
+                        {discountedPrice !== price ? (
+                            <span>
+                                <span className={styles.discountedPrice}>${discountedPrice.toFixed(2)}</span>{' '}
+                                <span className={styles.originalPrice}>${price.toFixed(2)}</span>
+                                <span className={styles.discount}>-{(discount / price * 100).toFixed(0)}%</span>
+                            </span>
+                        ) : (
+                            <span>${price.toFixed(2)}</span>
+                        )}
+                    </p>
                 </div>
             </div>
-            <p className={styles.productDescription}>{product.description}</p>
+            <p className={styles.productDescription}>{description}</p>
             <button className={styles.addToCartButton} onClick={addToCart}>
                 Add to Cart
             </button>
+
+            {reviews.length > 0 && (
+                <div className={styles.reviews}>
+                    <h3>Reviews</h3>
+                    <ul>
+                        {reviews.map((review) => (
+                            <li key={review.id}>
+                                <p>{review.username}</p>
+                                <p>{review.description}</p>
+                                <p>Rating: {review.rating}/5</p>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
         </div>
     );
 };

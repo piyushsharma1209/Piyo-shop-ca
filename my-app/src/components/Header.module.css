@@ -1,10 +1,26 @@
+/* Header.module.css */
 .header {
     background-color: white;
-    color: #fff;
+    color: #000;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px;
+}
+
+.logoContainer {
+    display: flex;
+    align-items: center;
+}
+
+.logoLink {
+    text-decoration: none;
+    color: black;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
 }
 
 .nav {
@@ -15,8 +31,58 @@
     padding: 0;
 }
 
+.navList {
+    display: flex;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navItem {
+    margin: 0;
+    padding: 0;
+}
+
 .navLink {
     text-decoration: none;
     color: black;
     font-size: 18px;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.line {
+    width: 25px;
+    height: 3px;
+    background-color: black;
+    margin-bottom: 5px;
+}
+
+.open .nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@media (max-width: 768px) {
+    .logoContainer {
+        flex: initial;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .open .nav {
+        display: flex;
+    }
 }

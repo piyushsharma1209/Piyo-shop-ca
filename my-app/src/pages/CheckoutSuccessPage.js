@@ -4,7 +4,13 @@ import styles from './CheckoutSuccessPage.module.css';
 import logo from '../images/green-tick.png';
 
 const CheckoutSuccessPage = ({ cartItems }) => {
-    const total = cartItems.reduce((accumulator, item) => accumulator + item.price, 0);
+    const total = cartItems.reduce(
+        (accumulator, item) =>
+            item.discountedPrice && item.discountedPrice < item.price
+                ? accumulator + item.discountedPrice
+                : accumulator + item.price,
+        0
+    );
 
     return (
         <div className={styles.checkoutSuccessPage}>
@@ -17,7 +23,11 @@ const CheckoutSuccessPage = ({ cartItems }) => {
                     <img src={item.imageUrl} alt={item.title} className={styles.productImage} />
                     <div className={styles.productDetails}>
                         <h3 className={styles.productTitle}>{item.title}</h3>
-                        <p className={styles.productPrice}>${item.price.toFixed(2)}</p>
+                        <p className={styles.productPrice}>
+                            ${item.discountedPrice && item.discountedPrice < item.price
+                                ? item.discountedPrice.toFixed(2)
+                                : item.price.toFixed(2)}
+                        </p>
                     </div>
                 </div>
             ))}

@@ -37,6 +37,20 @@
     margin-bottom: 10px;
 }
 
+.discountedPrice {
+    font-weight: bold;
+}
+
+.originalPrice {
+    text-decoration: line-through;
+    color: #888;
+    margin-right: 5px;
+}
+
+.discount {
+    color: red;
+}
+
 .productDescription {
     font-size: 16px;
     margin-bottom: 20px;
@@ -52,6 +66,27 @@
     cursor: pointer;
 }
 
-.loading {
+.reviews {
+    margin-top: 40px;
+}
+
+.reviews h3 {
     font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.reviews ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.reviews li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.reviews p {
+    margin: 0;
 }

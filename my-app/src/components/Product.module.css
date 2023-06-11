@@ -32,6 +32,17 @@
     margin: 4px;
 }
 
+.originalPrice {
+    text-decoration: line-through;
+    color: #888888;
+    margin-right: 5px;
+}
+
+.discount {
+    margin-left: 3px;
+    color: red;
+}
+
 .viewProductButton {
     background-color: #4caf50;
     color: #fff;

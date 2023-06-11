@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom';
 import styles from './CheckoutPage.module.css';
 
 const CheckoutPage = ({ cartItems, handleRemoveFromCart }) => {
-    const total = cartItems.reduce((accumulator, item) => accumulator + item.price, 0);
+    const total = cartItems.reduce(
+        (accumulator, item) =>
+            item.discountedPrice && item.discountedPrice < item.price
+                ? accumulator + item.discountedPrice
+                : accumulator + item.price,
+        0
+    );
 
     const handleRemove = (itemId) => {
         handleRemoveFromCart(itemId);
@@ -23,7 +29,13 @@ const CheckoutPage = ({ cartItems, handleRemoveFromCart }) => {
                         <img src={item.imageUrl} alt={item.title} className={styles.productImage} />
                         <div className={styles.productInfo}>
                             <h3 className={styles.productTitle}>{item.title}</h3>
-                            <span className={styles.productPrice}>${formatPrice(item.price)}</span>
+                            <span className={styles.productPrice}>
+                                ${formatPrice(
+                                    item.discountedPrice && item.discountedPrice < item.price
+                                        ? item.discountedPrice
+                                        : item.price
+                                )}
+                            </span>
                         </div>
                     </div>
                     <button className={styles.removeButton} onClick={() => handleRemove(item.id)}>
