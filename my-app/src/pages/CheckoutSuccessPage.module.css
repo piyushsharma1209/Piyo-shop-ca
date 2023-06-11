@@ -51,3 +51,15 @@
     display: inline-block;
     margin-top: 20px;
 }
+
+.continueShoppingButton {
+    display: inline-block;
+    background-color: #2196f3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}

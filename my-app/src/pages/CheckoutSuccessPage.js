@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './CheckoutSuccessPage.module.css';
 import logo from '../images/green-tick.png';
 
-const CheckoutSuccessPage = ({ cartItems }) => {
+const CheckoutSuccessPage = ({ cartItems, resetCart }) => {
     const total = cartItems.reduce(
         (accumulator, item) =>
             item.discountedPrice && item.discountedPrice < item.price
@@ -11,6 +11,10 @@ const CheckoutSuccessPage = ({ cartItems }) => {
                 : accumulator + item.price * item.quantity,
         0
     );
+
+    const handleContinueShopping = () => {
+        resetCart(); // Call the resetCart function to clear the cart
+    };
 
     return (
         <div className={styles.checkoutSuccessPage}>
@@ -32,7 +36,7 @@ const CheckoutSuccessPage = ({ cartItems }) => {
                 </div>
             ))}
             <div className={styles.total}>Total: ${total.toFixed(2)}</div>
-            <Link to="/products" className={styles.continueShoppingButton}>
+            <Link to="/products" className={styles.continueShoppingButton} onClick={handleContinueShopping}>
                 Continue Shopping
             </Link>
         </div>

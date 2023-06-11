@@ -31,6 +31,10 @@ function App() {
     setCartItems(updatedCartItems);
   };
 
+  const resetCart = () => {
+    setCartItems([]);
+  };
+
   return (
     <Router>
       <div className="app">
@@ -73,7 +77,7 @@ function App() {
             <Route
               path="/checkout-success"
               render={(props) => (
-                <CheckoutSuccessPage {...props} cartItems={cartItems} />
+                <CheckoutSuccessPage {...props} cartItems={cartItems} resetCart={resetCart} />
               )}
             />
           </Switch>
