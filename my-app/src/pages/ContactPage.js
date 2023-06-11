@@ -9,7 +9,16 @@ const ContactPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle form submission logic
+        // Add validation logic here
+        if (fullName && subject && email && body) {
+            // All fields are filled, perform desired action
+            console.log('Form data:', {
+                fullName,
+                subject,
+                email,
+                body,
+            });
+        }
     };
 
     return (
