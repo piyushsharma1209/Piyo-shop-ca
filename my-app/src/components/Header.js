@@ -11,10 +11,6 @@ const Header = ({ cartItemsCount }) => {
         setIsMenuOpen(!isMenuOpen);
     };
 
-    const closeMenu = () => {
-        setIsMenuOpen(false);
-    };
-
     return (
         <header className={styles.header}>
             <div className={styles.logoContainer}>
@@ -22,7 +18,7 @@ const Header = ({ cartItemsCount }) => {
                     <img src={logo} alt="Logo" className={styles.logo} />
                 </Link>
             </div>
-            <nav className={`${styles.nav} ${isMenuOpen ? styles.open : ''}`} onClick={closeMenu}>
+            <nav className={`${styles.nav} ${isMenuOpen ? styles.open : ''}`}>
                 <ul className={styles.navList}>
                     <li className={styles.navItem}>
                         <Link to="/" className={styles.navLink}>
