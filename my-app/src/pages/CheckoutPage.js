@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './CheckoutPage.module.css';
 
-const CheckoutPage = ({ cartItems, handleRemove, handleUpdateQuantity }) => {
+const CheckoutPage = ({ cartItems, handleRemoveFromCart, handleUpdateQuantity }) => {
     const [quantity, setQuantity] = useState({});
 
     const handleQuantityChange = (itemId, value) => {
@@ -24,6 +24,10 @@ const CheckoutPage = ({ cartItems, handleRemove, handleUpdateQuantity }) => {
         0
     );
 
+    const handleRemove = (itemId) => {
+        handleRemoveFromCart(itemId);
+    };
+
     return (
         <div className={styles.checkoutPage}>
             {cartItems.map((item) => (
@@ -33,9 +37,7 @@ const CheckoutPage = ({ cartItems, handleRemove, handleUpdateQuantity }) => {
                         <div className={styles.productInfo}>
                             <h3 className={styles.productTitle}>{item.title}</h3>
                             <span className={styles.productPrice}>
-                                ${item.discountedPrice && item.discountedPrice < item.price
-                                    ? item.discountedPrice
-                                    : item.price}
+                                ${item.discountedPrice && item.discountedPrice < item.price ? item.discountedPrice : item.price}
                             </span>
                             <div>
                                 Quantity:{' '}

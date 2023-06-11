@@ -66,7 +66,7 @@ function App() {
                   {...props}
                   cartItems={cartItems}
                   handleRemoveFromCart={handleRemoveFromCart}
-                  handleUpdateQuantity={handleUpdateQuantity} // Pass the handleUpdateQuantity function as a prop
+                  handleUpdateQuantity={handleUpdateQuantity}
                 />
               )}
             />
