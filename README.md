@@ -1,6 +1,11 @@
 # Welcome to Piyo shopping website
 
-This website have a lot of products with search function, add to cart, checkout and after pressing on continue shopping the cart reset. Contact page has an form with console logs the data in filled in the form.  
+This website have a lot of products with search function, add to cart, checkout and after pressing on continue shopping the cart reset. Contact page has an form with console logs the data in filled in the form.
+
+## Link
+
+- Live demo link: 
+[Live Demo](https://unique-kitsune-11aece.netlify.app/)
 
 # Getting Started with Create React App
 
